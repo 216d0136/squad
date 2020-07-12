@@ -1,0 +1,2 @@
+class TeamCommentsController < ApplicationController
+end

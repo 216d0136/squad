@@ -1,15 +1,14 @@
- <%= form_for(team) do |f| %>
-  <div class="field row">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: 'col-xs-12 team_name' %>
+<div class='row'>
+  <div class='col-xs-3'>
+    <h2>New Team</h2>
+    <%= render 'form', team: @team %>
   </div>
+  
 
-  <div class="field row">
-    <%= f.label :description %>
-    <%= f.text_area :body, class: 'col-xs-12 team_body'%>
+  <div class='col-xs-9'>
+    <h2>Team detail</h2>
+    <table class='table'>
+        <%= render 'detail', team: @team %>
+    </table>
   </div>
-
-  <div class="actions row">
-    <%= f.submit class: 'btn btn-primary col-xs-12'%>
-  </div>
-<% end %>
+</div>

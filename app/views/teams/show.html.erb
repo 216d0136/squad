@@ -8,7 +8,34 @@
   <div class='col-xs-9'>
     <h2>Team detail</h2>
     <table class='table'>
-        <%= render 'detail', team: @team %>
-    </table>
-  </div>
+     <tr class="team_<%= @team.id %>"></tr>
+     <%= render 'teams/detail', team: @team %>
+   </table>
+
+   <table class="show-tb comment_<%#= @team.id %>">
+      <%#= render 'comment', team_comments: @team.team_comments %>
+   </table>
+
+<% @team_comments.each do |team_comment| %>
+  <tr>
+    <td>
+      <%= link_to user_path(team_comment.user), class: "user_#{team_comment.user.id}" do %>
+        <%= attachment_image_tag team_comment.user, :profile_image, :fill, 50, 50 %><br>
+        <%= team_comment.user.name %>
+      <% end %>
+    </td>
+    <td><%= team_comment.comment %></td>
+    <% if team_comment.user == current_user %>
+      <td><%= link_to 'Destroy', team_team_comment_path(@team.id, team_comment.id), method: :delete, remote: false %></td>
+    <% end %>
+  </tr>
+<% end %>
+
+<div class="comment-form">
+     <%= form_for [@team, @team.team_comments.new] do |f| %>
+     <%= f.text_area :comment, size: "90*5" %>
+     <%= f.submit '送信' %>
+     <% end %>
 </div>
+
+  

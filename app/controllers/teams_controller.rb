@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+before_action :authenticate_user!
 def index
     @teams = Team.all
     @team = Team.new
@@ -6,6 +7,7 @@ def index
 
   def show
     @team = Team.find(params[:id])
+    @team_comments = @team.team_comments
   end
   def edit
     @team = Team.find(params[:id])

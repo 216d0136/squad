@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  attachment :profile_image_id, destroy: false
+  attachment :profile_image, destroy: false
   has_many :teams
   #validates :name, presence: true, length: {maximum: 10, minimum: 2}
   #validates :introduction, length: {maximum: 50}

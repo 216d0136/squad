@@ -14,13 +14,9 @@ ActiveRecord::Schema.define(version: 2020_07_11_061715) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "team_id"
-    t.integer "team_comment_id"
+    t.integer "taam_comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["team_comment_id"], name: "index_favorites_on_team_comment_id"
-    t.index ["team_id"], name: "index_favorites_on_team_id"
-    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -36,8 +32,6 @@ ActiveRecord::Schema.define(version: 2020_07_11_061715) do
     t.integer "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["team_id"], name: "index_team_comments_on_team_id"
-    t.index ["user_id"], name: "index_team_comments_on_user_id"
   end
 
   create_table "teams", force: :cascade do |t|

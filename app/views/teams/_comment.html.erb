@@ -1,0 +1,21 @@
+<% team_comments.each do |team_comment| %>
+  <tr>
+    <td>
+      <%= link_to user_path(team_comment.user), class: "user_#{team_comment.user.id}" do %>
+        <%= attachment_image_tag team_comment.user, :image, :fill, 50, 50 %><br>
+        <%= team_comment.user.name %>
+      <% end %>
+    </td>
+    <td><%= team_comment.comment %></td>
+    <% if team_comment.user == current_user %>
+      <td><%= link_to 'Destroy', team_team_comments_path(team_comment), class: 'btn-sm btn-danger', method: :delete, remote: true %></td>
+    <% end %>
+  </tr>
+<% end %>
+
+<div class="comment-form">
+     <%= form_for [@team, @team_comment] do |f| %>
+     <%= f.text_area :comment, size: "90*5" %>
+     <%= f.submit '送信' %>
+     <% end %>
+</div>

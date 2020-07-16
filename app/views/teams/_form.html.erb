@@ -1,0 +1,18 @@
+<%= form_for(team) do |f| %>
+  <div class="field row">
+  　<%= f.attachment_field :image %>
+  </div>
+  <div class="field row">
+    <%= f.label :team_name %>
+    <%= f.text_field :name, class: 'col-xs-12 team_name' %>
+  </div>
+
+  <div class="field row">
+    <%= f.label :description %>
+    <%= f.text_area :body, class: 'col-xs-12 team_body'%>
+  </div>
+
+  <div class="actions row">
+    <%= f.submit %>
+  </div>
+<% end %>

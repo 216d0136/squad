@@ -15,9 +15,12 @@ ActiveRecord::Schema.define(version: 2020_07_11_061715) do
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "team_id"
-    t.integer "comment_id"
+    t.integer "team_comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["team_comment_id"], name: "index_favorites_on_team_comment_id"
+    t.index ["team_id"], name: "index_favorites_on_team_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -28,18 +31,22 @@ ActiveRecord::Schema.define(version: 2020_07_11_061715) do
   end
 
   create_table "team_comments", force: :cascade do |t|
-    t.text "comment"
+    t.string "comment"
+    t.integer "user_id"
+    t.integer "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_comments_on_team_id"
+    t.index ["user_id"], name: "index_team_comments_on_user_id"
   end
 
   create_table "teams", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
+    t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_id"
-    t.text "description"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,6 +55,9 @@ ActiveRecord::Schema.define(version: 2020_07_11_061715) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "name"
+    t.text "introduction"
+    t.string "profile_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

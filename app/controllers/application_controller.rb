@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   private
     #sign in後のredirect先変更
     def after_sign_in_path_for(resource)
-      users_path(resource)
+      user_path(resource)
     end
 
     #sign out後のredirect先変更

@@ -7,7 +7,6 @@ class CreateTeams < ActiveRecord::Migration[5.2]
       t.datetime :created_at
       t.datetime :updated_at
       t.string :image_id
-      
 
       t.timestamps
     end

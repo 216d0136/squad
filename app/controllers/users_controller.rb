@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   #before_action :screen_user, only: [:edit, :update]
- def show
+  def show
     @user = User.find(params[:id])
     @teams = @user.teams
     @team = Team.new
@@ -24,7 +24,14 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  def follows
 
+  end
+
+  def followers
+    
+  end
+  
   private
     def user_params
        params.require(:user).permit(:name, :introduction, :profile_image)

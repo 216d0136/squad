@@ -7,6 +7,7 @@ class TeamCommentsController < ApplicationController
     @team_comment.user_id = current_user.id
     if @team_comment.save
       flash[:success] = "Comment was successfully created."
+      redirect_to request.referer
     else
       @team_comments = TeamComment.where(id: @team)
     end

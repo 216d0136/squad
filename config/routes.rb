@@ -13,8 +13,18 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followed', as: 'followers'
   end
   
+  get 'team_fav_delete' => 'favorites#destroy'
+
   resources :teams, only: [:index, :show, :edit, :create, :update, :destroy] do
-    resources :team_comments, only: [:create, :destroy]
+    resources :team_comments, only: [:create, :destroy] do
+    	resources :favorites,except: [:create, :destroy] do
+    	    collection do
+    	    	post :create_comment_fav
+    	    	delete :destroy_comment_fav
+    	    end
+        end
+    end
     resources :favorites, only: [:create, :destroy]
+
   end
 end

@@ -3,6 +3,7 @@ before_action :authenticate_user!
 def index
     @teams = Team.all
     @team = Team.new
+    @all_ranks = Team.find(Favorite.group(:team_id).order('count(team_id) desc').limit(3).pluck(:team_id))
   end
 
   def show

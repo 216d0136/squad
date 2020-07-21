@@ -9,7 +9,8 @@
     </thead>
 
 <tbody>
-  <% @teams.each do |team| %>
+  <% teams.each do |team| %>
+   <tr>
       <td><%= attachment_image_tag team, :image, :fill, 100, 100 %></td>
       <td><%= link_to team.name,team, class: "team_#{team.id}" %></td>
       <td><%= team.body %></td>
@@ -26,5 +27,6 @@
         <% end %>
       <% end %>
     </td>
+  </tr>
   <% end %>
 </tbody>

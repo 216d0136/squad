@@ -1,6 +1,6 @@
 <td>
   <%= link_to(team.user) do %>
-    <%= attachment_image_tag team.user, :image, :fill, 50, 50 %>
+    <%= attachment_image_tag(team.user, :image, :fill, 50, 50, fallback: "no-image.jpg") %>
   <% end %>
 </td>
 <td><%= link_to team.name,team, class: "team_#{team.id}" %></td>

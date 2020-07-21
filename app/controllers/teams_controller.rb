@@ -1,8 +1,8 @@
 class TeamsController < ApplicationController
 before_action :authenticate_user!
-def index
+  def index
+	@team = Team.new
     @teams = Team.all
-    @team = Team.new
     @all_ranks = Team.find(Favorite.group(:team_id).order('count(team_id) desc').limit(3).pluck(:team_id))
   end
 
@@ -10,19 +10,23 @@ def index
     @team = Team.find(params[:id])
     @team_comments = @team.team_comments
   end
+
+  def new
+  	@team = Team.new
+  end
+
   def edit
     @team = Team.find(params[:id])
-    #screen_user(@team)
+    screen_user(@team)
   end
 
   def create
     @team = Team.new(team_params)
-    #binding.pry
-     @team.user_id = current_user.id
+    @team.user_id = current_user.id
     if @team.save
       redirect_to team_path(@team)
     else
-      @team = Team.all
+      @teams = Team.all
       render 'index'
     end
   end
@@ -46,5 +50,11 @@ def index
     def team_params
       params.require(:team).permit(:name, :body, :image)
     end	
+
+    def screen_user(book)
+      if @team.user.id != current_user.id
+        redirect_to teams_path
+      end
+    end
 
 end

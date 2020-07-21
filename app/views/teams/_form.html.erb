@@ -1,6 +1,10 @@
+
 <%= form_for(team) do |f| %>
   <div class="field row">
-  　<%= f.attachment_field :image %>
+  <%= attachment_image_tag team, :image, size:"100x60", fallback: "no_image.jpg", id: 'preview' %>
+  
+  <%#= attachment_image_tag(team, :image, :size, "100*100", fallback: "no_image.jpg") %>
+  <%= f.attachment_field :image, class: "team_image" %>
   </div>
   <div class="field row">
     <%= f.label :team_name %>

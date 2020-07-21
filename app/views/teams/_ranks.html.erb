@@ -1,0 +1,22 @@
+<% all_ranks.each do |team| %>
+<%# all_ranks.each.with_index(1) do |team, i| %>
+  <tr>
+    <td>
+     <td><%= attachment_image_tag team, :image, :fill, 100, 100 %></td>
+          <td><%= link_to team.name,team, class: "team_#{team.id}" %></td>
+          <td><%= team.body %></td>
+        <td>
+          <% if team.favorited_by?(current_user) %>
+            <% favorite = team.favorites.find_by(user_id: current_user.id) %>
+            <%#= link_to team_favorite_path(team, team.favorite_id, redirect_id: 0), method: :delete do %>
+            <%= link_to team_fav_delete_path(favorite_id: favorite.id) do %>
+            <span class="glyphicon glyphicon-heart"><%= team.favorites.count%></span>
+            <% end %>
+          <% else %>
+            <%= link_to team_favorites_path(team, redirect_id: 0), method: :post do %>
+              <span class="glyphicon glyphicon-heart-empty"><%= team.favorites.count %></span>
+            <% end %>
+          <% end %>
+      </td>
+  </tr>
+<% end %>

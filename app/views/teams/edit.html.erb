@@ -1,10 +1,27 @@
 <div class='row'>
 	<div class='col-md-6 col-md-offset-3'>
 		<h1>Editing Team</h1>
-	<%= render 'layouts/error_messages', model: @team %>
-  	    <%= render 'form', team: @team %>
-  	    <%= link_to 'Show', @team, class: "team_#{@team.id}" %> |
-		<%= link_to 'Back', teams_path, class: "back" %>
-    </div>
-    <div class='col-md-3'></div>
+		<%= render 'layouts/error_messages', model: @team %>
+			<%= form_for(@team) do |f| %>
+			  <div class="field">
+			  <%= attachment_image_tag @team, :image, size:"375x225", fallback: "no_image.jpg", id: 'preview' %>
+			  <%= f.attachment_field :image, class: "team_image" %>
+			  </div>
+			  <div class="field">
+			    <%= f.label :team_name %><br>
+			    <%= f.text_field :name, class: 'team_name' %>
+			  </div>
+
+			  <div class="field">
+			    <%= f.label :description %><br>
+			    <%= f.text_area :body, class: 'team_body'%>
+			  </div>
+
+			  <div class="actions">
+			    <%= f.submit %>
+			  </div>
+			<% end %>
+			<%= link_to 'Show', @team, class: "team_#{@team.id}" %>
+			<%= link_to 'Back', teams_path, class: "back" %>
+	</div>
 </div>

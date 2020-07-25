@@ -1,4 +1,3 @@
-<div class='col-xs-4'>
   <div class="row">
     <div class='col-xs-3'>
       image
@@ -12,14 +11,12 @@
     <div class='col-xs-3'>
       favorites
     </div>
- </div>
- <div style="border-bottom: 5px solid red;"></div>
- <% all_ranks.each do |team| %>
-  <%# all_ranks.each.with_index(1) do |team, i| %>
-  <div class="row" style="margin-bottom:30px;">
-    <div style="border-top: 2px solid blue;"></div>
+  </div>
+  <div style="border-bottom: 5px solid red;"></div>
+  <% teams.each do |team| %>
+   <div class="row" style="margin-bottom:30px;">
     <div class='col-xs-3'>
-      <%= attachment_image_tag team, :image, :fill, 75, 75 %>
+      <%= attachment_image_tag team, :image, :fill, 100, 100 %>
     </div>
     <div class='col-xs-3'>
       <%= link_to team.name,team, class: "team_#{team.id}" %>
@@ -39,8 +36,7 @@
           <span class="glyphicon glyphicon-heart-empty"><%= team.favorites.count %></span>
         <% end %>
       <% end %>
-    </div>
-    
-  </div>
- <% end %>
-</div>
+    </div>  
+   </div>
+  <% end %>
+  <%#= paginate teams %>

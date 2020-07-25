@@ -1,20 +1,20 @@
 <div class='row'>
-  <div class='col-xs-3'>
+  <div class='hidden-sm col-md-3'>
     <h2>New Team</h2>
-
-    <%= render 'form', team: Team.new %>
+    <%#= render 'users/profile', user: @user %>
+    <%#= render 'layouts/error_messages', model: Team.new %>
+    <%= render 'layouts/error_messages', model: @team %>
+    <%= render 'teams/form', team: Team.new %>
   </div>
-  
-
-  <div class='col-xs-9'>
+  <div class='col-sm-12 col-md-9'>
     <h2>Team detail</h2>
-    <table class='table'>
-     <tr class="team_<%= @team.id %>"></tr>
-     <%= render 'teams/detail', team: @team %>
-   </table>
+      <div class="row">
+      <%= render 'teams/detail', team: @team %>
+      </div>
+      <div class="row">
+      <%= render 'teams/comment', team_comments: @team_comments, team_comment: @team_comment, team: @team %>
+      </div>
+  </div>
+</div>
 
-   <table class="show-tb comment_<%= @team.id %>">
-    
-      <%= render 'teams/comment', team_comments: @team_comments, team: @team %>
-   </table>
 

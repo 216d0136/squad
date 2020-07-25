@@ -1,14 +1,17 @@
 class TeamsController < ApplicationController
 before_action :authenticate_user!
   def index
-	@team = Team.new
+	  @team = Team.new
+    #@team = Team.all#(created_at: :desc)
     @teams = Team.all
-    @all_ranks = Team.find(Favorite.group(:team_id).order('count(team_id) desc').limit(3).pluck(:team_id))
+    #@teams = Team.page(params[:page]).per(10).order(id: "desc") 
   end
 
   def show
     @team = Team.find(params[:id])
+    @teams = Team.new
     @team_comments = @team.team_comments
+    @team_comment = TeamComment.new
   end
 
   def new
@@ -27,7 +30,24 @@ before_action :authenticate_user!
       redirect_to team_path(@team)
     else
       @teams = Team.all
-      render 'index'
+      url = Rails.application.routes.recognize_path(request.referrer)
+      pre_controller =url[:controller]
+      pre_action = url[:action]
+      
+      if pre_controller == "users" && pre_action == "show"
+	    @user = User.find(url[:id])
+	    @teams = @user.teams    	
+      	render 'users/show'
+      elsif pre_controller == "teams" && pre_action == "index"
+      	render 'teams/index'#temas コントローラーの index アクションで使用しいているrender
+      elsif pre_controller == "teams" && pre_action == "show"
+        @team = Team.find(params[:team][:team_id])
+        @team_comments = @team.team_comments
+        @team_comment = TeamComment.new
+      	render 'teams/show'
+      else
+      	render 'teams/new'
+      end
     end
   end
 
@@ -51,7 +71,7 @@ before_action :authenticate_user!
       params.require(:team).permit(:name, :body, :image)
     end	
 
-    def screen_user(book)
+    def screen_user(team)
       if @team.user.id != current_user.id
         redirect_to teams_path
       end

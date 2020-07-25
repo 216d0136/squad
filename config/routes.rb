@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  
+
 
   root 'homes#top'
   get 'homes/about'
@@ -11,9 +11,10 @@ Rails.application.routes.draw do
     get 'follows' => 'relationships#follower', as: 'follows'
     get 'followers' => 'relationships#followed', as: 'followers'
   end
-  
-  get 'team_fav_delete' => 'favorites#destroy'
 
+  #favorite消すのに
+  get 'team_fav_delete' => 'favorites#destroy'
+  #post 'teams/comments_create' => 'team_comments#create'
   resources :teams, only: [:index, :show, :new, :edit, :create, :update, :destroy] do
     resources :team_comments, only: [:create, :destroy] do
     	resources :favorites,except: [:create, :destroy] do

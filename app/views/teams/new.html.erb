@@ -1,9 +1,27 @@
-<div class="container">
-	<div class="row">
-		<div class="col-xs-12">
-			<h3>チーム投稿</h3>
-			<%= render 'layouts/error_messages', model: @team %>
-   		    <%= render 'form', team: @team %>
-   	    </div>
-   	</div>
-</div>
+<div class="container-fluid">
+  <div class="row">
+	<div class="col-xs-10">
+		<h3>チーム投稿</h3>
+		<%= render 'layouts/error_messages', model: @team %>
+		<%= form_for(@team) do |f| %>
+		  <div class="field row">
+		  <%= attachment_image_tag @team, :image, size:"375x225", fallback: "no_image.jpg", id: 'preview' %>
+		  <%= f.attachment_field :image, class: "team_image" %>
+		  </div>
+		  <div class="field row">
+		    <%= f.label :team_name %><br>
+		    <%= f.text_field :name, class: 'col-xs-3 team_name' %>
+		  </div>
+
+		  <div class="field row">
+		    <%= f.label :description %><br>
+		    <%= f.text_area :body, class: 'col-xs-5 team_body'%>
+		  </div>
+
+		  <div class="actions row">
+		    <%= f.submit %>
+		  </div>
+		<% end %>
+	</div>
+  </div>
+</div>			

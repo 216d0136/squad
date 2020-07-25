@@ -7,7 +7,7 @@ class FavoritesController < ApplicationController
   end
 
   def create_comment_fav
-  	favorite = Favorite.new(user_id:current_user.id,team_comment_id:params[:team_comment_id])
+  	favorite = Favorite.new(user_id: current_user.id, team_comment_id: params[:team_comment_id])
   	favorite.save
   	redirect_to request.referer
   end

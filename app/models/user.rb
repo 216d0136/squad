@@ -7,5 +7,6 @@ class User < ApplicationRecord
   validates :introduction, length: {maximum: 400}
   attachment :profile_image, destroy: false
   has_many :teams
+  has_many :team_comments
   has_many :favorites
 end

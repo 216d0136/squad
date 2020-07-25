@@ -1,14 +1,16 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  #before_action :screen_user, only: [:edit, :update]
+  before_action :screen_user, only: [:edit, :update]
   def show
     @user = User.find(params[:id])
     @teams = @user.teams
+    #@teams = Team.page(params[:page]).per(10).order(id: "desc") 
     @team = Team.new
   end
 
   def index
     @users = User.all
+    #@users = User.page(params[:page]).per(10).order(id: "desc") 
     @team = Team.new
   end
 
@@ -31,9 +33,15 @@ class UsersController < ApplicationController
   def followers
     
   end
-  
+
   private
     def user_params
        params.require(:user).permit(:name, :introduction, :profile_image)
     end
+
+    def screen_user
+      unless params[:id].to_i == current_user.id
+        redirect_to user_path
+      end
+    end 
 end

@@ -12,6 +12,9 @@
 					<tr>
 
 						<td>ようこそ、<%= current_user.name %>さん！</td>
+						<td><%#= link_to edit_user_path do %>
+  							<span class="glyphicon glyphicon-user" aria-hidden="true"></span></td>
+						<%# end %>
 						<td><%= link_to new_team_path do %>
 							<span class="btn btn-primary">＋</span></td>
 						<% end %>

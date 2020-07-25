@@ -2,9 +2,10 @@
   <div class='hidden-sm col-md-3'>
     <h2>New Team</h2>
     <%#= render 'users/profile', user: @user %>
-    <%#= render 'layouts/error_messages', model: Team.new %>
+    <%= render 'layouts/error_messages', model: @team_new %>
+
     <%= render 'layouts/error_messages', model: @team %>
-    <%= render 'teams/form', team: Team.new %>
+    <%= render 'teams/form', team: @team_new %>
   </div>
   <div class='col-sm-12 col-md-9'>
     <h2>Team detail</h2>

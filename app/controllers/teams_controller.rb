@@ -1,21 +1,21 @@
 class TeamsController < ApplicationController
 before_action :authenticate_user!
   def index
-	  @team = Team.new
+	  @team_new = Team.new
     #@team = Team.all#(created_at: :desc)
-    @teams = Team.all
+    @team_all = Team.all
     #@teams = Team.page(params[:page]).per(10).order(id: "desc") 
   end
 
   def show
     @team = Team.find(params[:id])
-    @teams = Team.new
+    @team_new = Team.new
     @team_comments = @team.team_comments
     @team_comment = TeamComment.new
   end
 
   def new
-  	@team = Team.new
+  	@team_new = Team.new
   end
 
   def edit
@@ -24,30 +24,12 @@ before_action :authenticate_user!
   end
 
   def create
-    @team = Team.new(team_params)
-    @team.user_id = current_user.id
-    if @team.save
-      redirect_to team_path(@team)
+    @team_new = Team.new(team_params)
+    @team_new.user_id = current_user.id
+    if @team_new.save
+      redirect_to team_path(@team_new)
     else
-      @teams = Team.all
-      url = Rails.application.routes.recognize_path(request.referrer)
-      pre_controller =url[:controller]
-      pre_action = url[:action]
-      
-      if pre_controller == "users" && pre_action == "show"
-	    @user = User.find(url[:id])
-	    @teams = @user.teams    	
-      	render 'users/show'
-      elsif pre_controller == "teams" && pre_action == "index"
-      	render 'teams/index'#temas コントローラーの index アクションで使用しいているrender
-      elsif pre_controller == "teams" && pre_action == "show"
-        @team = Team.find(params[:team][:team_id])
-        @team_comments = @team.team_comments
-        @team_comment = TeamComment.new
-      	render 'teams/show'
-      else
-      	render 'teams/new'
-      end
+      render 'teams/new'
     end
   end
 

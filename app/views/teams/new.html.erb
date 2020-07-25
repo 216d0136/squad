@@ -2,10 +2,10 @@
   <div class="row">
 	<div class="col-xs-10">
 		<h3>チーム投稿</h3>
-		<%= render 'layouts/error_messages', model: @team %>
-		<%= form_for(@team) do |f| %>
+		<%= render 'layouts/error_messages', model: @team_new %>
+		<%= form_for(@team_new) do |f| %>
 		  <div class="field row">
-		  <%= attachment_image_tag @team, :image, size:"375x225", fallback: "no_image.jpg", id: 'preview' %>
+		  <%= attachment_image_tag @team_new, :image, size:"375x225", fallback: "no_image.jpg", id: 'preview' %>
 		  <%= f.attachment_field :image, class: "team_image" %>
 		  </div>
 		  <div class="field row">

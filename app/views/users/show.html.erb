@@ -3,8 +3,8 @@
     <h2>User info</h2>
       <%= render 'users/profile', user: @user %>
     <h2>New Team</h2>
-      <%= render 'layouts/error_messages', model: Team.new %>
-      <%= render 'teams/form', team: Team.new %>
+      <%= render 'teams/form', team_new: @team_new %>
+      <%#= render partial: 'teams/form', locals: {team_new: @team_new, team: @team} %>
  </div>
  <div class='col-sm-12 col-md-9'>
     <h2>My Teams</h2>

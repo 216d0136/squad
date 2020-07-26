@@ -1,8 +1,13 @@
-
+<% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>">
+        <% message2 = message.gsub(",","<br>") %>
+        <%= message2.html_safe %>
+      </div>
+<% end %>
 <%#= render 'layouts/error_messages', model: @team %>
-<%= form_for(team) do |f| %>
+<%= form_for(team_new) do |f| %>
   <div class="field">
-  <%= attachment_image_tag team, :image, size:"200x120", fallback: "no_image.jpg", id: 'preview' %>
+  <%= attachment_image_tag team_new, :image, size:"200x120", fallback: "no_image.jpg", id: 'preview' %>
   <%= f.attachment_field :image, class: "team_image" %>
   </div>
   <div class="field">
@@ -14,8 +19,10 @@
     <%= f.label :description %><br>
     <%= f.text_area :body, class: 'team_body'%>
   </div>
-
+  <%# if team != nil %>
   <%#= f.hidden_field :team_id,value: team.id, class: 'team_body'%>
+  <%# end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

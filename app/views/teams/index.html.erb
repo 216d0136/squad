@@ -1,13 +1,14 @@
  <div class='row'>
    <div class='hidden-sm col-md-3'>
      <h2>New Team</h2>
-     <%= render 'layouts/error_messages', model: @team_new %>
-      <%= render 'teams/form', team: @team_new %>
+     <%#= render 'layouts/error_messages', model: @team_new %>
+      <%= render 'teams/form', team_new: @team_new %>
+      <%#= render partial: 'teams/form', locals: {team_new: @team_new, team: @team} %>
    </div>
    <div class='col-sm-12 col-md-9'> 
       <h2>Teams</h2>
         <%= render 'teams/index', teams_all: @team_all %>
-        <%#= paginate @teams %>
+        <%= paginate @team_all %>
    </div>
  </div>
 

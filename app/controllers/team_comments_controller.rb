@@ -15,7 +15,12 @@ class TeamCommentsController < ApplicationController
     #binding.pry
       @team_comments = TeamComment.where(team_id: @team.id)
       #@team_comments = @team.team_comments
-      render 'teams/show'
+      error_message = ""
+      @team.errors.full_messages.each do |message| 
+        error_message << message
+      end
+      redirect_to ({:action => 'show', :controller => 'teams', :id => @team.id}), :notice => error_message
+      #render 'teams/show'
     end
   end
 

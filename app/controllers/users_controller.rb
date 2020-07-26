@@ -3,15 +3,15 @@ class UsersController < ApplicationController
   before_action :screen_user, only: [:edit, :update]
   def show
     @user = User.find(params[:id])
-    @teams = @user.teams
-    #@teams = Team.page(params[:page]).per(10).order(id: "desc") 
-    @team = Team.new
+    #@teams = @user.teams
+    @teams = @user.teams.page(params[:page]).per(10).order(id: "desc") 
+    @team_new = Team.new
   end
 
   def index
-    @users = User.all
-    #@users = User.page(params[:page]).per(10).order(id: "desc") 
-    @team = Team.new
+    #@users = User.all
+    @users = User.page(params[:page]).per(10).order(id: "desc") 
+    @team_new = Team.new
   end
 
   def edit

@@ -4,7 +4,7 @@ before_action :authenticate_user!
 	  @team_new = Team.new
     #@team = Team.all#(created_at: :desc)
     #@team_all = Team.all
-    @team_all = Team.page(params[:page]).per(10).order(id: "desc") 
+    @team_all = Team.page(params[:page]).per(10).order(id: "desc")
   end
 
   def show

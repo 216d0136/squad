@@ -10,11 +10,10 @@
 			<div class="col-xs-8">
 				<table class="table header_table">
 					<tr>
-
 						<td>ようこそ、<%= current_user.name %>さん！</td>
-						<td><%#= link_to edit_user_path do %>
+						<td><%= link_to edit_user_path(current_user) do %>
   							<span class="glyphicon glyphicon-user" aria-hidden="true"></span></td>
-						<%# end %>
+						<% end %>
 						<td><%= link_to new_team_path do %>
 							<span class="btn btn-primary">＋</span></td>
 						<% end %>

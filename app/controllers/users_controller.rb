@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     #@users = User.all
     @users = User.page(params[:page]).per(10).order(id: "desc") 
     @team_new = Team.new
+    #@user = User.find(params[:id])
   end
 
   def edit

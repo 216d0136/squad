@@ -1,15 +1,18 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  #before_action :screen_user, only: [:edit, :update]
- def show
+  before_action :screen_user, only: [:edit, :update]
+  def show
     @user = User.find(params[:id])
-    @teams = @user.teams
-    @team = Team.new
+    #@teams = @user.teams
+    @teams = @user.teams.page(params[:page]).per(10).order(id: "desc") 
+    @team_new = Team.new
   end
 
   def index
-    @users = User.all
-    @team = Team.new
+    #@users = User.all
+    @users = User.page(params[:page]).per(10).order(id: "desc") 
+    @team_new = Team.new
+    #@user = User.find(params[:id])
   end
 
   def edit
@@ -24,9 +27,22 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  def follows
+
+  end
+
+  def followers
+    
+  end
 
   private
     def user_params
        params.require(:user).permit(:name, :introduction, :profile_image)
     end
+
+    def screen_user
+      unless params[:id].to_i == current_user.id
+        redirect_to user_path
+      end
+    end 
 end

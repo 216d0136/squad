@@ -1,21 +1,57 @@
-<% team_comments.each do |team_comment| %>
-  <tr>
-    <td>
+<div class="row">
+    <div class='col-xs-4'>
+    </div>
+    <div class='col-xs-4'>
+       本文
+    </div>
+    <div class='col-xs-4'>
+       いいね
+    </div>    
+ <h3>コメント</h3>
+
+ <div class="comment-form">
+  <%# binding.pry %>
+  <%= render 'layouts/error_messages', model: team_comment %>
+
+    <%#= form_for([team, team_comment], url: teams_comments_create_path) do |f| %>
+    <%#= f.hidden_field :team_id, :value => team.id %>
+   <%= form_for [team, team_comment] do |f| %>
+     <%= f.text_area :comment, size: "45*5" %>
+     <%= f.submit '送信' %>
+   <% end %>
+ </div>
+ <% team_comments.each do |team_comment| %>
+  <div class="row" style="margin-bottom:30px;border-top: 2px solid blue;">
+    <div class='col-xs-4'>
       <%= link_to user_path(team_comment.user), class: "user_#{team_comment.user.id}" do %>
-        <%= attachment_image_tag team_comment.user, :image, :fill, 50, 50 %><br>
+        <%= attachment_image_tag team, :image, :fill, 50, 50 %><br>
         <%= team_comment.user.name %>
       <% end %>
-    </td>
-    <td><%= team_comment.comment %></td>
-    <% if team_comment.user == current_user %>
-      <td><%= link_to 'Destroy', team_team_comments_path(team_comment), class: 'btn-sm btn-danger', method: :delete, remote: true %></td>
-    <% end %>
-  </tr>
-<% end %>
+    </div>          
+      <div class='col-xs-4'>
+        <%=safe_join(team_comment.comment.split("\n"),tag(:br))%>
+      </div>
+      <div class='col-xs-4'>
+        <% if team_comment.user == current_user %>
+          <%= link_to 'Destroy', "/teams/#{team.id}/team_comments/#{team_comment.id}", method: :delete, remote: false %>
+        <% end %>  
+        <% if team_comment.favorited_by?(current_user) %>
+          <% favorite = team_comment.favorites.find_by(user_id: current_user.id) %>
 
-<div class="comment-form">
-     <%= form_for [@team, @team_comment] do |f| %>
-     <%= f.text_area :comment, size: "90*5" %>
-     <%= f.submit '送信' %>
-     <% end %>
+
+          <%= link_to "/teams/#{team.id}/team_comments/#{team_comment.id}/favorites/destroy_comment_fav?redirect_id=2", method: :delete do %>
+            <span class="glyphicon glyphicon-heart"><%= team_comment.favorites.count%></span>
+          <% end %>
+        <% else %>
+
+          <%= link_to "/teams/#{team.id}/team_comments/#{team_comment.id}/favorites/create_comment_fav?redirect_id=2", method: :post do %>
+            <span class="glyphicon glyphicon-heart-empty"><%= team_comment.favorites.count %></span>
+          <% end %>
+        <% end %>
+      </div>
+  </div>
+ <% end %>
 </div>
+
+
+

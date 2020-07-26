@@ -1,10 +1,40 @@
+<h3>image</h3>
+<div class='col-xs-12'>
+	<%= attachment_image_tag team, :image, :fill, 225, 150 %>
+</div>
+<div class='col-xs-3'>
+  <h4>team_name</h4>
+  <%= link_to team.name,team, class: "team_#{team.id}" %>
+</div>
+<div class='col-xs-3'>
+  <h4>description</h4>
+  <%=safe_join(team.body.split("\n"),tag(:br))%>
+</div>
+<div class='col-xs-3'>
+ <h4>favorites</h4>
+  <% if team.favorited_by?(current_user) %>
+    <% favorite = team.favorites.find_by(user_id: current_user.id) %>
+    <%#= link_to team_favorite_path(team,team.favorite_id, redirect_id: 0), method: :delete do %>
+    <!--いらない-->
+    <%#= link_to "/teams/#{team.id}/favorites?redirect_id=0", method: :delete do %>
+    <%= link_to team_fav_delete_path(favorite_id: favorite.id) do %>
+    <%#= link_to "/team_fav_delete?favorite_id/", method: :get do %>
+    	<span class="glyphicon glyphicon-heart"><%= team.favorites.count%></span>
+    <% end %>
+  <% else %>
+    <%#= link_to team_favorites_path(team, redirect_id: 0), method: :post do %>
+    <%= link_to "/teams/#{team.id}/favorites?redirect_id=0", method: :post do %>
+      <span class="glyphicon glyphicon-heart-empty"><%= team.favorites.count %></span>
+    <% end %>
+  <% end %>
+</div>
+<div class='col-xs-3'>
+  <h4></h4>
+  <% if team.user == current_user %>
+		<%#= link_to 'Edit', edit_team_path(team), class: "btn-sm btn-success edit_team_#{team.id}" %>
+		<%= link_to 'Edit', "/teams/#{team.id}/edit", class: "btn-sm btn-success edit_team_#{team.id}" %>
 
-<td><%= attachment_image_tag team, :image, :fill, 100, 100 %></td>
-<td><%= link_to team.name,team, class: "team_#{team.id}" %></td>
-<td><%= team.body %></td>
+		<%= link_to 'Destroy', team, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_team_#{team.id}"%>
+  <% end %>
+</div>
 
-
-<% if team.user == current_user %>
-  <td><%= link_to 'Edit', edit_team_path(team), class: "btn-sm btn-success edit_team_#{team.id}" %></td>
-  <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_team_#{team.id}"%></td>
-<% end %>

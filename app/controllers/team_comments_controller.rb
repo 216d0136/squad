@@ -1,14 +1,26 @@
 class TeamCommentsController < ApplicationController
   before_action :authenticate_user!
   def create
+    #@team = Team.find(params[:team_comment][:team_id])
     @team = Team.find(params[:team_id])
     @team_new = Team.new
-    @team_comment = @team.team_comments.new(team_comment_params)
-    @team_comment.user_id = current_user.id
-    if @team_comment.save
-      flash[:success] = "Comment was successfully created."
+    @team_comment = TeamComment.new
+    @team.team_comments.build(comment: team_comment_params[:comment], user_id: current_user.id)
+    @team_comments = @team.team_comments
+   #binding.pry
+    if @team.save
+      flash[:notice] = "Comment was successfully created."
+      redirect_to team_path(@team)
     else
-      @team_comments = TeamComment.where(id: @team)
+    #binding.pry
+      @team_comments = TeamComment.where(team_id: @team.id)
+      #@team_comments = @team.team_comments
+      error_message = ""
+      @team.errors.full_messages.each do |message| 
+        error_message << message
+      end
+      redirect_to ({:action => 'show', :controller => 'teams', :id => @team.id}), :notice => error_message
+      #render 'teams/show'
     end
   end
 

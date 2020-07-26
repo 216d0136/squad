@@ -2,12 +2,14 @@
     <tr>
       <th>image</th>
       <th>user_name</th>
+      <th>introduction</th>
       <th colspan="3"></th>
     </tr>
   <tbody>
       <tr>
-        <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50 %></td>
+        <td><%= attachment_image_tag user, :profile_image, size:"60x60", fallback: "icon.jpg" %></td>
         <td><%= user.name %></td>
+        <td><%#=safe_join(user.introduction.split("\n"),tag(:br))%></td>
       </tr>
   </tbody>
 </table>
@@ -19,4 +21,4 @@
 
 
 
-  
+   

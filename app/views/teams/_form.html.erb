@@ -1,18 +1,29 @@
-<%= form_for(team) do |f| %>
-  <div class="field row">
-  　<%= f.attachment_field :image %>
+<% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>">
+        <% message2 = message.gsub(",","<br>") %>
+        <%= message2.html_safe %>
+      </div>
+<% end %>
+<%#= render 'layouts/error_messages', model: @team %>
+<%= form_for(team_new) do |f| %>
+  <div class="field">
+  <%= attachment_image_tag team_new, :image, size:"200x120", fallback: "no_image.jpg", id: 'preview' %>
+  <%= f.attachment_field :image, class: "team_image" %>
   </div>
-  <div class="field row">
-    <%= f.label :team_name %>
-    <%= f.text_field :name, class: 'col-xs-12 team_name' %>
+  <div class="field">
+    <%= f.label :team_name %><br>
+    <%= f.text_field :name, class: 'team_name' %>
   </div>
 
-  <div class="field row">
-    <%= f.label :description %>
-    <%= f.text_area :body, class: 'col-xs-12 team_body'%>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :body, class: 'team_body'%>
   </div>
+  <%# if team != nil %>
+  <%#= f.hidden_field :team_id,value: team.id, class: 'team_body'%>
+  <%# end %>
 
-  <div class="actions row">
+  <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>

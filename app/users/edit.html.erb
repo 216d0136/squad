@@ -1,0 +1,21 @@
+<h2>User info</h2>
+<%= render 'layouts/error_messages', model: @user %>
+<%= form_for(@user) do |f| %>
+  <div class="field">
+    <%= f.label :image %>
+    <%#= f.attachment_field :profile_image, class: "user_image" %>
+    <%= attachment_image_tag user, :profile_image, size:"60x60", fallback: "icon.jpg" %>
+  </div>  
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "name" %>
+  </div>
+  <div class="field">
+    <%= f.label :introduction %>
+    <%= f.text_area :introduction, class: "introduction" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

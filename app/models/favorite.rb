@@ -1,5 +1,6 @@
 class Favorite < ApplicationRecord
   belongs_to :user
-  belongs_to :team
-  belongs_to :team_comment
+  belongs_to :team, optional:true
+  belongs_to :team_comment, optional:true
+
 end

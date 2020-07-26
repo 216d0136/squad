@@ -1,0 +1,27 @@
+  <div class="row">
+    <div class='col-xs-4'>
+      image
+    </div>
+    <div class='col-xs-4'>
+      user_name
+    </div>
+    <div class='col-xs-4'>
+    </div>
+  </div>
+  <div style="border-bottom: 5px solid blue;"></div>
+  <% users.each do |user| %>
+    <div class="row" style="margin-bottom:30px;">
+      <div style="border-top: 2px solid blue;"></div>
+      <div class="col-xs-4">
+        <%= attachment_image_tag user, :profile_image, size:"60x60", fallback: "icon.jpg" %>
+      </div>
+      <div class="col-xs-4">
+        <%= user.name %>
+      </div>
+      <div class="col-xs-4">
+        <%= link_to 'Show', user, class: "user_#{user.id}" %>
+      </div>
+    </div>
+  <% end %>
+  <%= paginate users %>
+

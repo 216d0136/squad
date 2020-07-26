@@ -1,0 +1,27 @@
+<table class='table'>
+    <tr>
+      <th>image</th>
+      <th>user_name</th>
+      <th>introduction</th>
+      <th colspan="3"></th>
+    </tr>
+  <tbody>
+      <tr>
+        <%#= attachment_image_tag(user, :profile_image, :size, "50*50", fallback: "icon.jpeg") %>
+        <%#= attachment_image_tag user, :profile_image, :fill, 50, 50, fallback: "icon.jpg" %>
+        <td><%= attachment_image_tag user, :profile_image, size:"60x60", fallback: "icon.jpg" %></td>
+        <%#= attachment_image_tag user, :profile_image, format: 'png',size: '100×100', fallback: "no_image.jpg" %>
+        <td><%= user.name %></td>
+        <td><%= user.introduction %>
+      </tr>
+  </tbody>
+</table>
+
+<div class='row'>
+  <%= link_to '',edit_user_path(user),class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
+</div>
+
+
+
+
+   

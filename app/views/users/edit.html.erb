@@ -1,19 +1,19 @@
 <h2>User info</h2>
+<%= render 'layouts/error_messages', model: @user %>
 
 <%= form_for(@user) do |f| %>
 
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: "name" %>
-  </div>
-
-  <div class="field">
     <%= f.label :image %>
+    <%= attachment_image_tag @user, :profile_image, size:"60x60", fallback: "icon.jpg" %>
     <%= f.attachment_field :profile_image, class: "user_image" %>
   </div>
-
   <div class="field">
-    <%= f.label :introduction %>
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: "name" %>
+  </div>
+  <div class="field">
+    <%= f.label :introduction %><br>
     <%= f.text_area :introduction, class: "introduction" %>
   </div>
 

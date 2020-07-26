@@ -26,10 +26,11 @@ before_action :authenticate_user!
   def create
     @team_new = Team.new(team_params)
     @team_new.user_id = current_user.id
+    @team_all = Team.page(params[:page]).per(10).order(id: "desc")
     if @team_new.save
       redirect_to team_path(@team_new)
     else
-      @team_all = Team.all
+
       url = Rails.application.routes.recognize_path(request.referrer)
       pre_controller =url[:controller]
       pre_action = url[:action]

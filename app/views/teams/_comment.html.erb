@@ -24,7 +24,7 @@
   <div class="row" style="margin-bottom:30px;border-top: 2px solid blue;">
     <div class='col-xs-4'>
       <%= link_to user_path(team_comment.user), class: "user_#{team_comment.user.id}" do %>
-        <%= attachment_image_tag team, :image, :fill, 50, 50 %><br>
+        <%#= attachment_image_tag team, :image, :fill, 50, 50 %><br>
         <%= team_comment.user.name %>
       <% end %>
     </div>          

@@ -30,7 +30,6 @@ before_action :authenticate_user!
     if @team_new.save
       redirect_to team_path(@team_new)
     else
-
       url = Rails.application.routes.recognize_path(request.referrer)
       pre_controller =url[:controller]
       pre_action = url[:action]
